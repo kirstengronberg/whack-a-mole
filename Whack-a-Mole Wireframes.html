@@ -1,0 +1,224 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Whack-a-Mole Wireframes</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: a wrapping row of four phone-sized screens in play order, each with numbered callouts and the API call it makes listed underneath. */
+:root {
+  --font: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, Menlo, Consolas, monospace;
+  --bg: #e9ecf1;
+  --paper: #fbfcfd;
+  --ink: #2a3140;
+  --muted: #5b6577;
+  --fill: #d5dae3;
+  --fill-2: #bcc3d0;
+  --line: #8a93a5;
+  --mark: #1f5fd1;
+  --mark-fg: #ffffff;
+  --api: #e3ecfb;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141821; --paper: #1d2230; --ink: #e2e6ee; --muted: #9aa4b8;
+    --fill: #2c3345; --fill-2: #3a4259; --line: #5d677d;
+    --mark: #6ea0ff; --mark-fg: #0d1320; --api: #1f2c49;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141821; --paper: #1d2230; --ink: #e2e6ee; --muted: #9aa4b8;
+  --fill: #2c3345; --fill-2: #3a4259; --line: #5d677d;
+  --mark: #6ea0ff; --mark-fg: #0d1320; --api: #1f2c49;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 15px; line-height: 1.45;
+  padding-block: 24px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.page { max-width: 1040px; margin: 0 auto; display: grid; gap: 24px; }
+h1 { margin: 0 0 4px; font-size: clamp(24px, 5vw, 32px); line-height: 1.1; text-wrap: balance; }
+.lede { margin: 0; color: var(--muted); max-width: 62ch; }
+
+.screens { display: flex; flex-wrap: wrap; gap: 28px 24px; align-items: flex-start; }
+.screen { flex: 1 1 220px; max-width: 240px; min-width: 0; display: grid; gap: 12px; }
+.screen h2 { margin: 0; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+
+.phone {
+  border: 2px solid var(--ink); border-radius: 22px; background: var(--paper);
+  padding: 14px 12px; display: grid; gap: 10px; align-content: start; min-height: 430px; position: relative;
+}
+.row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.line { height: 9px; border-radius: 5px; background: var(--fill-2); }
+.line.w40 { width: 40%; } .line.w60 { width: 60%; } .line.w80 { width: 80%; } .line.w100 { width: 100%; }
+.title { height: 16px; width: 62%; border-radius: 5px; background: var(--ink); opacity: .85; }
+.box {
+  border: 1.5px solid var(--line); border-radius: 8px; padding: 6px 8px; font-size: 11px; color: var(--muted);
+  background: var(--fill); min-width: 0; text-align: center; line-height: 1.2;
+}
+.box b { display: block; color: var(--ink); font-size: 16px; }
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.bar { height: 8px; border-radius: 5px; background: var(--fill); border: 1.5px solid var(--line); overflow: hidden; }
+.bar i { display: block; height: 100%; width: 60%; background: var(--fill-2); }
+.lawn { border: 1.5px solid var(--line); border-radius: 12px; padding: 8px; background: var(--fill); display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; position: relative; }
+.hole { aspect-ratio: 1; border-radius: 50%; border: 1.5px dashed var(--line); background: var(--paper); display: grid; place-items: center; font-size: 10px; color: var(--muted); }
+.hole.mole { background: var(--fill-2); border-style: solid; }
+.btn { border: 2px solid var(--ink); border-radius: 10px; padding: 8px; text-align: center; font-weight: 700; font-size: 13px; background: var(--paper); }
+.btn.ghost { border-color: var(--line); font-weight: 500; color: var(--muted); }
+.card { border: 1.5px dashed var(--line); border-radius: 12px; padding: 10px; display: grid; gap: 8px; background: var(--paper); text-align: center; }
+.big { font-size: 40px; font-weight: 800; line-height: 1; }
+.overlay { position: absolute; inset: 58px 8px auto 8px; z-index: 1; }
+.input { border: 1.5px solid var(--line); border-radius: 8px; padding: 7px 8px; font-size: 12px; color: var(--muted); text-align: left; background: var(--paper); }
+.lb { display: grid; gap: 6px; }
+.lb .item { display: grid; grid-template-columns: 20px 1fr 34px; align-items: center; gap: 8px; padding: 6px 8px; border: 1.5px solid var(--line); border-radius: 8px; background: var(--fill); }
+.lb .item.me { border-color: var(--mark); border-width: 2px; }
+.lb .item span { font-size: 11px; color: var(--muted); }
+
+.m {
+  position: absolute; width: 20px; height: 20px; border-radius: 50%;
+  background: var(--mark); color: var(--mark-fg); font-size: 11px; font-weight: 700;
+  display: grid; place-items: center; z-index: 2; box-shadow: 0 0 0 2px var(--paper);
+}
+
+.notes { margin: 0; padding: 0; list-style: none; display: grid; gap: 5px; font-size: 13px; }
+.notes li { display: grid; grid-template-columns: 20px 1fr; gap: 8px; align-items: start; }
+.notes .n { width: 20px; height: 20px; border-radius: 50%; background: var(--mark); color: var(--mark-fg); font-size: 11px; font-weight: 700; display: grid; place-items: center; }
+.api { font-family: var(--mono); font-size: 12px; background: var(--api); border-radius: 8px; padding: 6px 8px; overflow-wrap: anywhere; }
+
+.flow { background: var(--paper); border: 1.5px solid var(--line); border-radius: 12px; padding: 14px 16px; display: grid; gap: 8px; }
+.flow h2 { margin: 0; font-size: 15px; }
+.flow ol { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+.flow code { font-family: var(--mono); font-size: 12.5px; background: var(--api); border-radius: 5px; padding: 1px 5px; }
+</style>
+
+<div class="page">
+  <header>
+    <h1>Whack-a-Mole wireframes</h1>
+    <p class="lede">Four screens in play order. Numbered dots match the notes under each screen, and the blue strip shows the API call the screen makes.</p>
+  </header>
+
+  <div class="screens">
+
+    <section class="screen" aria-label="Start screen">
+      <h2>1 · Start</h2>
+      <div class="phone">
+        <div class="row"><div class="title"></div><div class="box" style="padding:3px 8px">Best<b style="font-size:13px">0</b></div></div>
+        <div class="tiles"><div class="box">Score<b>0</b></div><div class="box">Streak<b>0</b></div><div class="box">Time<b>30</b></div></div>
+        <div class="bar"><i style="width:100%"></i></div>
+        <div class="lawn" style="min-height:230px">
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+        </div>
+        <div class="overlay">
+          <div class="card" style="box-shadow:0 6px 18px rgba(0,0,0,.18)">
+            <div class="title" style="margin:0 auto;width:40%"></div>
+            <div class="line w100"></div><div class="line w80" style="margin:0 auto"></div>
+            <div class="line w60"></div><div class="line w60"></div>
+            <div class="btn">Start game</div>
+          </div>
+          <span class="m" style="right:-6px;top:-8px">1</span>
+          <span class="m" style="left:-6px;bottom:6px">2</span>
+        </div>
+      </div>
+      <ul class="notes">
+        <li><span class="n">1</span><span>Rules card sits over the empty board.</span></li>
+        <li><span class="n">2</span><span>Start begins a 30-second round.</span></li>
+      </ul>
+      <div class="api">POST /api/sessions</div>
+    </section>
+
+    <section class="screen" aria-label="Playing screen">
+      <h2>2 · Playing</h2>
+      <div class="phone">
+        <div class="row"><div class="title"></div><div class="box" style="padding:3px 8px">Best<b style="font-size:13px">24</b></div></div>
+        <div class="tiles" style="position:relative"><div class="box">Score<b>12</b></div><div class="box">Streak<b>3</b></div><div class="box">Time<b>17</b></div>
+          <span class="m" style="left:-6px;top:-8px">1</span></div>
+        <div class="bar" style="position:relative"><i></i></div>
+        <div class="lawn" style="min-height:230px">
+          <div class="hole"></div><div class="hole mole">mole</div><div class="hole"></div>
+          <div class="hole"></div><div class="hole"></div><div class="hole mole">gold</div>
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+          <span class="m" style="right:-8px;top:-8px">2</span>
+        </div>
+        <div class="row"><div class="line w60"></div><div class="btn ghost" style="padding:3px 8px;font-size:11px">Sound</div></div>
+        <span class="m" style="left:-8px;bottom:42px">3</span>
+      </div>
+      <ul class="notes">
+        <li><span class="n">1</span><span>Score, streak and time update live. The bar and time turn red in the last 5 seconds.</span></li>
+        <li><span class="n">2</span><span>Tap a mole to score. Gold moles are worth 3. Empty taps reset the streak.</span></li>
+        <li><span class="n">3</span><span>Sound toggle. Keys 7 to 3 map to the grid on a keyboard.</span></li>
+      </ul>
+      <div class="api">No call. The round runs in the browser.</div>
+    </section>
+
+    <section class="screen" aria-label="Results screen">
+      <h2>3 · Results</h2>
+      <div class="phone">
+        <div class="row"><div class="title"></div><div class="box" style="padding:3px 8px">Best<b style="font-size:13px">31</b></div></div>
+        <div class="tiles"><div class="box">Score<b>31</b></div><div class="box">Streak<b>0</b></div><div class="box">Time<b>0</b></div></div>
+        <div class="bar"><i style="width:0"></i></div>
+        <div class="lawn" style="min-height:230px;align-content:center">
+          <div class="card" style="grid-column:1/-1;position:relative">
+            <div class="line w40" style="margin:0 auto"></div>
+            <div class="big">31</div>
+            <div class="row" style="justify-content:center"><div class="box">New best</div></div>
+            <div class="tiles"><div class="box">Hits<b style="font-size:13px">19</b></div><div class="box">Acc.<b style="font-size:13px">86%</b></div><div class="box">Best<b style="font-size:13px">31</b></div></div>
+            <div class="input">Name (optional)</div>
+            <div class="btn">Save score</div>
+            <div class="btn ghost">Play again</div>
+            <span class="m" style="right:-8px;top:-8px">1</span>
+            <span class="m" style="left:-8px;top:96px">2</span>
+            <span class="m" style="right:-8px;bottom:40px">3</span>
+          </div>
+        </div>
+      </div>
+      <ul class="notes">
+        <li><span class="n">1</span><span>Final score, with a badge when it beats the saved best.</span></li>
+        <li><span class="n">2</span><span>Optional name, 20 characters at most.</span></li>
+        <li><span class="n">3</span><span>Save sends the score. Play again skips it.</span></li>
+      </ul>
+      <div class="api">POST /api/sessions/:id/finish</div>
+    </section>
+
+    <section class="screen" aria-label="Leaderboard screen">
+      <h2>4 · Leaderboard</h2>
+      <div class="phone">
+        <div class="row"><div class="title"></div><div class="btn ghost" style="padding:3px 8px;font-size:11px">Back</div></div>
+        <div class="lb" style="position:relative">
+          <div class="item"><b>1</b><div class="line w60"></div><b>48</b></div>
+          <div class="item"><b>2</b><div class="line w80"></div><b>44</b></div>
+          <div class="item"><b>3</b><div class="line w40"></div><b>41</b></div>
+          <div class="item"><b>4</b><div class="line w60"></div><b>37</b></div>
+          <div class="item me"><b>5</b><div class="line w80"></div><b>31</b></div>
+          <div class="item"><b>6</b><div class="line w40"></div><b>29</b></div>
+          <div class="item"><b>7</b><div class="line w60"></div><b>26</b></div>
+          <div class="item"><b>8</b><div class="line w80"></div><b>22</b></div>
+          <span class="m" style="right:-8px;top:-10px">1</span>
+          <span class="m" style="right:-8px;top:152px">2</span>
+        </div>
+        <div class="btn">Play again</div>
+      </div>
+      <ul class="notes">
+        <li><span class="n">1</span><span>Top 10 by score. Ties go to the earlier run.</span></li>
+        <li><span class="n">2</span><span>The player's own row is outlined.</span></li>
+      </ul>
+      <div class="api">GET /api/scores?limit=10</div>
+    </section>
+
+  </div>
+
+  <section class="flow" aria-label="Request order">
+    <h2>Request order for one round</h2>
+    <ol>
+      <li>Player taps Start. The client calls <code>POST /api/sessions</code> and keeps the returned <code>id</code>.</li>
+      <li>The 30-second round runs locally.</li>
+      <li>Player taps Save score. The client calls <code>POST /api/sessions/:id/finish</code> with name, score, hits and misses. The reply includes the rank.</li>
+      <li>The leaderboard loads with <code>GET /api/scores?limit=10</code>.</li>
+    </ol>
+  </section>
+</div>
+
+</body></html>
