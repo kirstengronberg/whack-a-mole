@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#214b3b">
+  <meta name="description" content="Play Garden Dash, a cheerful Whack-a-Mole game, or browse its wireframes.">
+  <title>Garden Dash | Whack-a-Mole</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      color: #173a2c;
+      background: #f3f5e9;
+      font-synthesis: none;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background-image: radial-gradient(rgba(50, 120, 88, .12) .8px, transparent .8px);
+      background-size: 19px 19px;
+    }
+
+    main {
+      width: min(100%, 620px);
+      padding: clamp(24px, 6vw, 48px);
+      border: 1px solid #d9e1d0;
+      border-radius: 20px;
+      background: #fffdf5;
+      box-shadow: 0 16px 38px rgba(34, 65, 43, .11);
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: #327858;
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: Georgia, serif;
+      font-size: clamp(2.5rem, 10vw, 4.5rem);
+      line-height: 1;
+    }
+
+    .description {
+      max-width: 48ch;
+      margin: 18px 0 28px;
+      color: #46594d;
+      font-size: 1.05rem;
+      line-height: 1.65;
+    }
+
+    nav { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    a {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 18px;
+      border: 2px solid #214b3b;
+      border-radius: 10px;
+      color: #214b3b;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    a:hover { background: #eff5d5; }
+    a:focus-visible { outline: 3px solid #b34d36; outline-offset: 3px; }
+    a.primary { background: #214b3b; color: #fff; }
+    a.primary:hover { background: #327858; }
+
+    .note {
+      margin: 24px 0 0;
+      color: #46594d;
+      font-size: .9rem;
+      line-height: 1.55;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">A tiny garden game</p>
+    <h1>Garden Dash</h1>
+    <p class="description">Catch the moles before the 30-second timer runs out. Brown moles earn one point, and golden moles earn three.</p>
+    <nav aria-label="Project pages">
+      <a class="primary" href="./Whack-a-Mole.html">Play the game</a>
+      <a href="./Whack-a-Mole%20Wireframes.html">View the wireframes</a>
+    </nav>
+    <p class="note">Your scores and leaderboard are saved only in this browser; they are not shared with other players.</p>
+  </main>
+</body>
+</html>
