@@ -12,8 +12,6 @@ The game has no build step or runtime dependencies. Scores and the top-ten leade
 
 ## GitHub Pages
 
-The workflow in `.github/workflows/pages.yml` publishes the repository root when changes are pushed to `main`. Once Pages is enabled for the repository, the site is available at:
+The workflow in `.github/workflows/pages.yml` publishes the repository root when changes are pushed to `main`. A repository administrator must first open **Settings → Pages**, choose **GitHub Actions** as the build and deployment source, and save. The workflow token cannot enable Pages on a repository that has not been configured. After setup and a successful deployment, the site is available at:
 
 <https://kirstengronberg.github.io/whack-a-mole/>
-
-If the initial deployment cannot enable Pages automatically, a repository administrator must enable GitHub Pages with **GitHub Actions** as the build and deployment source in the repository's Pages settings.
